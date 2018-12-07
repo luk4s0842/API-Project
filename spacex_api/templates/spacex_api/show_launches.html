@@ -1,0 +1,9 @@
+{% extends 'spacex_api/base.html' %}
+
+{% block content %}
+  <h2>{{ title }}</h2>
+  {% for launch in data %}
+    <p>Mission Name: {{ launch.mission_name }}<br>
+    Launch Date: {{ launch.launch_date_utc }}</p>
+  {% endfor %}
+{% endblock %}

@@ -10,8 +10,9 @@ def next_launches(request):
 
     context = {
         'data':data,
+        'title':'Next Launches',
     }
-    return render(request, 'spacex_api/next_launches.html', context)
+    return render(request, 'spacex_api/show_launches.html', context)
 
 def previous_launches(request):
     response = requests.get('https://api.spacexdata.com/v3/launches/past?order=desc')
@@ -19,8 +20,9 @@ def previous_launches(request):
 
     context = {
         'data':data,
+        'title':'Previous Launches',
     }
-    return render(request, 'spacex_api/previous_launches.html', context)
+    return render(request, 'spacex_api/show_launches.html', context)
 
 def all_launches(request):
     response = requests.get('https://api.spacexdata.com/v3/launches/past?order=desc')
@@ -28,8 +30,9 @@ def all_launches(request):
 
     context = {
         'data':data,
+        'title':'All Launches',
     }
-    return render(request, 'spacex_api/previous_launches.html', context)
+    return render(request, 'spacex_api/show_launches.html', context)
 
 
 def details(request, launch_id):
