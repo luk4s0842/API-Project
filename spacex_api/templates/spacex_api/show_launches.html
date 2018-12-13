@@ -3,7 +3,20 @@
 {% block content %}
   <h2>{{ title }}</h2>
   {% for launch in data %}
-    <p>Mission Name: {{ launch.mission_name }}<br>
-    Launch Date: {{ launch.launch_date_utc }}</p>
+  <div class="card launch-container">
+    <h5 class="card-header">Mission: {{ launch.mission_name }}</h5>
+    <div class="card-body">
+      {% if launch.links.mission_patch_small %}<img src="{{ launch.links.mission_patch_small }}" class="mission-patch">{% endif %}
+      <h5 class="card-title" style="margin-bottom: 4px;">Rocket: {{ launch.rocket.rocket_name }}</h5>
+      {% load tz %}
+      <p class="card-text">Launch Date: {{ launch.launch_date_utc|slice:":10" }}<br>
+      Launch Location: {{ launch.launch_site.site_name_long }}</p>
+      {% if launch.details %}<p class="card-text">{{ launch.details }}</p>{% endif %}
+      <a href="{% url 'show_videos' launch.flight_number %}" class="btn btn-info">Videos</a>
+      {% if launch.links.wikipedia %}<a href="{{ launch.links.wikipedia }}" class="btn btn-info">Wikipedia</a>{% endif %}
+      {% if launch.links.article_link %}<a href="{{ launch.links.article_link }}" class="btn btn-info">Article</a>{% endif %}
+      {% if launch.links.reddit_launch %}<a href="{{ launch.links.reddit_launch }}" class="btn btn-info">Reddit</a>{% endif %}
+    </div>
+  </div>
   {% endfor %}
 {% endblock %}
